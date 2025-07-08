@@ -1,0 +1,15 @@
+{
+  "max_epochs": 3,
+  "batch_size": 2,
+  "learning_rate": 5e-05,
+  "gradient_accumulation_steps": 2,
+  "save_steps": 500,
+  "logging_steps": 100,
+  "model_name": "Wikidepia/IndoT5-base-paraphrase",
+  "checkpoint_dir": "checkpoints",
+  "data_dir": "data",
+  "log_dir": "logs",
+  "use_mixed_precision": true,
+  "data_sample_ratio": 0.3,
+  "max_steps_per_epoch": 100
+}
