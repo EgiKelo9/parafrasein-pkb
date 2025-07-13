@@ -1,32 +1,32 @@
 [
   {
-    "original": "Melihat permasalahan tersebut, diperlukan sebuah aplikasi sederhana yang dapat membantu mahasiswa untuk memparafrasekan kalimat berbahasa Indonesia, dengan cara yang lebih kontekstual dan alami, serta dapat berjalan secara lokal dengan AI sederhana yang dibangun dari awal sebagai bagian dari eksperimen edukatif.",
-    "paraphrase": "Setelah melihat masalah tersebut, diperlukan aplikasi sederhana yang dapat bekerja secara lokal untuk membantu mahasiswa, dalam pemparaf kalimat bahasa Indonesia, yang dapat digunakan secara lebih konkrit dan alami, dan dapat secara lokal, dengan beberapa AI sederhana yang dibangun dari awal sebagai subjek eksperimen edukatif.",
+    "original": "Tahap berikutnya adalah Retraining & Building, di mana model pra-latih disesuaikan (fine-tuned) dengan data parafrase yang telah diproses. Pada tahap ini, juga dilakukan evaluasi model menggunakan metrik seperti BLEU atau ROUGE. Setelah model selesai dilatih, ia masuk ke tahap Deployment & Serving, dimana model diintegrasikan ke dalam aplikasi sehingga bisa menerima input dari pengguna dan memberikan keluaran berupa kalimat parafrase.",
+    "paraphrase": "Tahap selanjutnya adalah Retraining & Building, di mana model pra-latih disesuaikan (disesuaikan) dengan data parafrase yang telah diproses, model juga dilakukan evaluasi model menggunakan metrik seperti BLEU atau ROUGE setelah model selesai dilatih, sehingga memungkinkan model untuk menerima input dari pengguna dan memberikan keluaran berupa kalimat parafrase.",
+    "style": "safe"
+  },
+  {
+    "original": "Tahap berikutnya adalah Retraining & Building, di mana model pra-latih disesuaikan (fine-tuned) dengan data parafrase yang telah diproses. Pada tahap ini, juga dilakukan evaluasi model menggunakan metrik seperti BLEU atau ROUGE. Setelah model selesai dilatih, ia masuk ke tahap Deployment & Serving, dimana model diintegrasikan ke dalam aplikasi sehingga bisa menerima input dari pengguna dan memberikan keluaran berupa kalimat parafrase.",
+    "paraphrase": "Tahap selanjutnya adalah Retraining & Building, di mana model pra-latih disesuaikan (disesuaikan) dengan data parafrase yang telah diproses, model juga dilakukan evaluasi model menggunakan metrik seperti BLEU atau ROUGE setelah model selesai dilatih, sehingga memungkinkan model untuk menerima input dari pengguna dan memberikan keluaran berupa kalimat parafrase.",
+    "style": "safe"
+  },
+  {
+    "original": "Tahap berikutnya adalah Retraining & Building, di mana model pra-latih disesuaikan (fine-tuned) dengan data parafrase yang telah diproses. Pada tahap ini, juga dilakukan evaluasi model menggunakan metrik seperti BLEU atau ROUGE. Setelah model selesai dilatih, ia masuk ke tahap Deployment & Serving, dimana model diintegrasikan ke dalam aplikasi sehingga bisa menerima input dari pengguna dan memberikan keluaran berupa kalimat parafrase.",
+    "paraphrase": "Tahap selanjutnya adalah Retraining & Building di mana model yang telah dikonsolidasikan (disesuaikan) dengan data parafrase yang diproses sebelumnya, pada tahap ini, model juga telah diintegrasikan ke dalam aplikasi sehingga dapat menerima input dari pengguna dan memberikan keluaran berupa parafrase kalimat.",
     "style": "balanced"
   },
   {
-    "original": "Melihat permasalahan tersebut, diperlukan sebuah aplikasi sederhana yang dapat membantu mahasiswa untuk memparafrasekan kalimat berbahasa Indonesia, dengan cara yang lebih kontekstual dan alami, serta dapat berjalan secara lokal dengan AI sederhana yang dibangun dari awal sebagai bagian dari eksperimen edukatif.",
-    "paraphrase": "Setelah melihat masalah tersebut, diperlukan aplikasi sederhana yang dapat bekerja secara lokal untuk membantu mahasiswa, dalam pemparaf kalimat bahasa Indonesia, yang dapat digunakan secara lebih konkrit dan alami, dan dapat secara lokal, dengan beberapa AI sederhana yang dibangun dari awal sebagai subjek eksperimen edukatif.",
+    "original": "Tahap berikutnya adalah Retraining & Building, di mana model pra-latih disesuaikan (fine-tuned) dengan data parafrase yang telah diproses. Pada tahap ini, juga dilakukan evaluasi model menggunakan metrik seperti BLEU atau ROUGE. Setelah model selesai dilatih, ia masuk ke tahap Deployment & Serving, dimana model diintegrasikan ke dalam aplikasi sehingga bisa menerima input dari pengguna dan memberikan keluaran berupa kalimat parafrase.",
+    "paraphrase": "Tahap selanjutnya adalah Retraining & Building di mana model yang telah dikonsolidasikan (disesuaikan) dengan data parafrase yang diproses sebelumnya, pada tahap ini, model juga telah diintegrasikan ke dalam aplikasi sehingga dapat menerima input dari pengguna dan memberikan keluaran berupa parafrase kalimat.",
     "style": "balanced"
   },
   {
-    "original": "Sebuah platform parafrase online untuk membantu kamu mengubah teks mentah menjadi lebih baik dan lebih mudah dipahami. Dengan teknologi AI, ParafraseIn dapat membantu kamu dalam bidang akademik",
-    "paraphrase": "Sebuah Platform Parafrase Online untuk membantu Anda mengubah teks mentah menjadi lebih baik dan sederhana, dengan teknik AI, ParafraseIn dapat membantu Anda dalam bidang akademis",
-    "style": "balanced"
+    "original": "Tahap berikutnya adalah Retraining & Building, di mana model pra-latih disesuaikan (fine-tuned) dengan data parafrase yang telah diproses. Pada tahap ini, juga dilakukan evaluasi model menggunakan metrik seperti BLEU atau ROUGE. Setelah model selesai dilatih, ia masuk ke tahap Deployment & Serving, dimana model diintegrasikan ke dalam aplikasi sehingga bisa menerima input dari pengguna dan memberikan keluaran berupa kalimat parafrase.",
+    "paraphrase": "Bagian selanjutnya adalah transcript & set, yang model pra-latih menyesuaikan (fine-tuned) dengan data Parafrase yang telah ditangani, pada tahap ini, juga melakukan evaluasi model, menggunakan metrik seperti BLEU atau ROUGE, ketika diperkenalkan, sehingga bisa menerima input dari pengguna dan memberikan keluaran berupa kalimat parafrase.",
+    "style": "creative"
   },
   {
-    "original": "Sebuah platform parafrase online untuk membantu kamu mengubah teks mentah menjadi lebih baik dan lebih mudah dipahami. Dengan teknologi AI, ParafraseIn dapat membantu kamu dalam bidang akademik",
-    "paraphrase": "Sebuah Platform Parafrase Online untuk membantu Anda mengubah teks mentah menjadi lebih baik dan sederhana, dengan teknik AI, ParafraseIn dapat membantu Anda dalam bidang akademis",
-    "style": "balanced"
-  },
-  {
-    "original": "Sebuah platform parafrase online untuk membantu kamu mengubah teks mentah menjadi lebih baik dan lebih mudah dipahami. Dengan teknologi AI, ParafraseIn dapat membantu kamu dalam bidang akademik",
-    "paraphrase": "Platform parafrase online yang dapat membantu Anda mengubah teks mentah menjadi lebih baik dan lebih mudah dipahami dengan teknologi AI.",
-    "style": "balanced"
-  },
-  {
-    "original": "Sebuah platform parafrase online untuk membantu kamu mengubah teks mentah menjadi lebih baik dan lebih mudah dipahami. Dengan teknologi AI, ParafraseIn dapat membantu kamu dalam bidang akademik",
-    "paraphrase": "Platform parafrase online yang dapat membantu Anda mengubah teks mentah menjadi lebih baik dan lebih mudah dipahami dengan teknologi AI.",
-    "style": "balanced"
+    "original": "Tahap berikutnya adalah Retraining & Building, di mana model pra-latih disesuaikan (fine-tuned) dengan data parafrase yang telah diproses. Pada tahap ini, juga dilakukan evaluasi model menggunakan metrik seperti BLEU atau ROUGE. Setelah model selesai dilatih, ia masuk ke tahap Deployment & Serving, dimana model diintegrasikan ke dalam aplikasi sehingga bisa menerima input dari pengguna dan memberikan keluaran berupa kalimat parafrase.",
+    "paraphrase": "Bagian selanjutnya adalah transcript & set, yang model pra-latih menyesuaikan (fine-tuned) dengan data Parafrase yang telah ditangani, pada tahap ini, juga melakukan evaluasi model, menggunakan metrik seperti BLEU atau ROUGE, ketika diperkenalkan, sehingga bisa menerima input dari pengguna dan memberikan keluaran berupa kalimat parafrase.",
+    "style": "creative"
   }
 ]

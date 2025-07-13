@@ -1,4 +1,3 @@
-# data_collection.py
 import pandas as pd
 from datasets import load_dataset, Dataset
 import torch
@@ -11,19 +10,12 @@ from collections import defaultdict
 
 class DataCollector:
     def __init__(self):
-        """
-        Kelas untuk mengumpulkan dan mempersiapkan dataset parafrase bahasa Indonesia
-        dari berbagai sumber Hugging Face
-        """
         self.datasets = []
         self.combined_data = None
         self.tokenizer = None
         self.model = None
         
     def initialize_model(self):
-        """
-        Inisialisasi model dan tokenizer seperti di teststreamlit.py
-        """
         try:
             self.tokenizer = AutoTokenizer.from_pretrained("Wikidepia/IndoT5-base-paraphrase")
             self.model = T5ForConditionalGeneration.from_pretrained("Wikidepia/IndoT5-base-paraphrase")
@@ -32,13 +24,7 @@ class DataCollector:
             print(f"Gagal memuat model: {e}")
         
     def load_indonesian_paraphrase_datasets(self):
-        """
-        Mengumpulkan dataset parafrase dari Hugging Face
-        Menggunakan dataset yang sama seperti di teststreamlit.py
-        """
         print("Mengumpulkan dataset parafrase bahasa Indonesia...")
-        
-        # Dataset: Paraphrase detection Indonesian (sama seperti di teststreamlit.py)
         try:
             paraphrase_dataset = load_dataset("jakartaresearch/id-paraphrase-detection")
             print(f"Dataset paraphrase detection loaded: {len(paraphrase_dataset['train'])} samples")
@@ -47,28 +33,19 @@ class DataCollector:
             print(f"Gagal memuat dataset paraphrase detection: {e}")
     
     def create_paraphrase_pairs(self):
-        """
-        Membuat pasangan parafrase dari dataset yang terkumpul
-        dengan kategorisasi berdasarkan tingkat kreativitas (safe, balanced, creative)
-        """
         paraphrase_pairs = []
         
         for dataset_name, dataset in self.datasets:
             if dataset_name == 'paraphrase_detection':
-                # Dataset ini sudah memiliki pasangan parafrase
                 for item in dataset['train']:
-                    if item['label'] == 1:  # Jika merupakan parafrase
-                        # Kategorisasi berdasarkan similarity score
+                    if item['label'] == 1:
                         similarity = self._calculate_similarity(item['sentence1'], item['sentence2'])
-                        
-                        # Kategorisasi seperti di teststreamlit.py
                         if similarity > 0.8:
                             category = 'safe'
                         elif similarity > 0.6:
                             category = 'balanced'
                         else:
                             category = 'creative'
-                            
                         paraphrase_pairs.append({
                             'original': item['sentence1'],
                             'paraphrase': item['sentence2'],
@@ -76,59 +53,37 @@ class DataCollector:
                             'source': dataset_name,
                             'similarity_score': similarity
                         })
-        
         self.combined_data = pd.DataFrame(paraphrase_pairs)
         print(f"Total pasangan parafrase yang terkumpul: {len(self.combined_data)}")
-        
-        # Distribusi kategori
         if not self.combined_data.empty:
             category_dist = self.combined_data['category'].value_counts()
             print("Distribusi kategori:")
             for cat, count in category_dist.items():
                 print(f"  {cat}: {count} samples")
-        
         return self.combined_data
     
     def _calculate_similarity(self, text1, text2):
-        """
-        Menghitung similarity menggunakan metode yang lebih baik
-        Mengadopsi pendekatan dari teststreamlit.py
-        """
         words1 = set(self._tokenize_text(text1.lower()))
         words2 = set(self._tokenize_text(text2.lower()))
-        
         intersection = words1.intersection(words2)
         union = words1.union(words2)
-        
         return len(intersection) / len(union) if union else 0
     
     def _tokenize_text(self, text):
-        """
-        Tokenisasi sederhana yang mempertahankan tanda baca
-        Sama seperti di teststreamlit.py
-        """
         tokens = re.findall(r'\w+|[^\w\s]', text)
         return [token for token in tokens if token.strip()]
     
     def analyze_word_changes(self, original_text, paraphrased_text):
-        """
-        Analisis perubahan kata antara teks asli dan parafrase
-        Mengadopsi fungsi dari teststreamlit.py
-        """
         original_words = self._tokenize_text(original_text.lower())
         paraphrased_words = self._tokenize_text(paraphrased_text.lower())
-        
         matcher = difflib.SequenceMatcher(None, original_words, paraphrased_words)
-        
         changes = []
         original_index = 0
         paraphrased_index = 0
-        
         for match in matcher.get_matching_blocks():
             if original_index < match.a or paraphrased_index < match.b:
                 original_segment = original_words[original_index:match.a]
                 paraphrased_segment = paraphrased_words[paraphrased_index:match.b]
-                
                 if original_segment and paraphrased_segment:
                     changes.append({
                         'type': 'substitution',
@@ -153,31 +108,21 @@ class DataCollector:
                         'original_pos': (original_index, original_index),
                         'paraphrased_pos': (paraphrased_index, match.b)
                     })
-            
             original_index = match.a + match.size
             paraphrased_index = match.b + match.size
-        
         return changes
     
     def generate_paraphrases_with_categories(self, text):
-        """
-        Generate parafrase dengan tiga kategori: safe, balanced, creative
-        Mengadopsi metode dari teststreamlit.py
-        """
         if not self.model or not self.tokenizer:
             self.initialize_model()
-            
         if not self.model or not self.tokenizer:
             return {"error": "Model tidak tersedia"}
-        
         temperature_settings = {
             "safe": 0.7,
             "balanced": 1.0,
             "creative": 1.3
         }
-        
         results = {}
-        
         for style, temp in temperature_settings.items():
             try:
                 inputs = self.tokenizer.encode(
@@ -186,7 +131,6 @@ class DataCollector:
                     max_length=512, 
                     truncation=True
                 )
-                
                 with torch.no_grad():
                     outputs = self.model.generate(
                         inputs,
@@ -197,24 +141,16 @@ class DataCollector:
                         eos_token_id=self.tokenizer.eos_token_id,
                         num_return_sequences=1
                     )
-                
                 paraphrase = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
-                results[style] = paraphrase
-                
+                results[style] = paraphrase              
             except Exception as e:
                 results[style] = f"Error: {str(e)}"
-        
         return results
     
     def prepare_training_data_from_dataset(self):
-        """
-        Mempersiapkan data training dari dataset yang dikumpulkan
-        Format sesuai dengan kebutuhan fine-tuning
-        """
         if self.combined_data is None or self.combined_data.empty:
             print("Tidak ada data untuk dipersiapkan. Jalankan create_paraphrase_pairs() terlebih dahulu.")
             return None
-        
         train_data = []
         for _, row in self.combined_data.iterrows():
             train_data.append({
@@ -222,38 +158,27 @@ class DataCollector:
                 "target_text": row["paraphrase"],
                 "category": row["category"]
             })
-        
         return Dataset.from_pandas(pd.DataFrame(train_data))
     
     def tokenize_data(self, examples):
-        """
-        Tokenisasi data untuk training
-        Mengadopsi dari teststreamlit.py
-        """
         if not self.tokenizer:
             self.initialize_model()
-            
         model_inputs = self.tokenizer(
             examples["input_text"],
             max_length=512,
             truncation=True,
             padding=True
         )
-        
         labels = self.tokenizer(
             examples["target_text"],
             max_length=512,
             truncation=True,
             padding=True
         )
-        
         model_inputs["labels"] = labels["input_ids"]
         return model_inputs
     
     def save_processed_data(self, filepath="processed_paraphrase_data.csv"):
-        """
-        Menyimpan data yang telah diproses
-        """
         if self.combined_data is not None and not self.combined_data.empty:
             self.combined_data.to_csv(filepath, index=False)
             print(f"Data tersimpan di: {filepath}")
@@ -261,9 +186,6 @@ class DataCollector:
             print("Tidak ada data untuk disimpan. Jalankan create_paraphrase_pairs() terlebih dahulu.")
     
     def load_processed_data(self, filepath="processed_paraphrase_data.csv"):
-        """
-        Memuat data yang telah diproses sebelumnya
-        """
         try:
             self.combined_data = pd.read_csv(filepath)
             print(f"Data berhasil dimuat dari: {filepath}")
@@ -274,43 +196,26 @@ class DataCollector:
             return None
     
     def get_statistics(self):
-        """
-        Mendapatkan statistik dari data yang terkumpul
-        """
         if self.combined_data is None or self.combined_data.empty:
             return "Tidak ada data tersedia"
-        
         stats = {
             "total_samples": len(self.combined_data),
             "category_distribution": self.combined_data['category'].value_counts().to_dict(),
             "average_similarity": self.combined_data['similarity_score'].mean() if 'similarity_score' in self.combined_data.columns else 0,
             "sources": self.combined_data['source'].value_counts().to_dict()
         }
-        
         return stats
 
 # Contoh penggunaan
 if __name__ == "__main__":
     collector = DataCollector()
-    
-    # Inisialisasi model
     collector.initialize_model()
-    
-    # Load dataset
     collector.load_indonesian_paraphrase_datasets()
-    
-    # Buat pasangan parafrase
     data = collector.create_paraphrase_pairs()
-    
-    # Simpan data
     collector.save_processed_data()
-    
-    # Tampilkan statistik
     stats = collector.get_statistics()
     print("\nStatistik Data:")
     print(json.dumps(stats, indent=2, ensure_ascii=False))
-    
-    # Contoh generate parafrase
     if collector.model and collector.tokenizer:
         sample_text = "Saya sedang belajar pemrograman Python"
         paraphrases = collector.generate_paraphrases_with_categories(sample_text)
